@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Path to Power - Political Science Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__badge">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <linearGradient id="flagGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#a78bfa" />
+            <stop offset="100%" stop-color="#10b981" />
+          </linearGradient>
+        </defs>
+        <circle cx="60" cy="60" r="56" class="badge__bg" />
+        <path d="M35 85 L60 30 L85 85 Z" class="badge__flag" />
+        <circle cx="60" cy="52" r="16" class="badge__sun" />
+      </svg>
+    </div>
+    <div>
+      <p class="eyebrow">Interactive Civics Lab</p>
+      <h1>Path to Power</h1>
+      <p class="lede">Shape your candidate's platform, react to news events, and watch how voters respond. Learn how policy trade-offs shift public support in real time.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel" aria-labelledby="profile-heading">
+      <div class="panel__header">
+        <h2 id="profile-heading">Candidate Profile</h2>
+        <button id="newCandidate" class="ghost">New Candidate</button>
+      </div>
+      <div class="candidate">
+        <div class="portrait" aria-hidden="true">
+          <div class="portrait__bg"></div>
+          <svg viewBox="0 0 160 200" role="img" aria-label="Candidate silhouette">
+            <circle cx="80" cy="70" r="40" class="portrait__head" />
+            <path d="M30 190 Q80 130 130 190 Z" class="portrait__body" />
+            <rect x="70" y="105" width="20" height="30" class="portrait__tie" />
+          </svg>
+        </div>
+        <div class="profile">
+          <div class="profile__row">
+            <label for="candidateName">Name</label>
+            <input id="candidateName" type="text" maxlength="32" value="Alex Parker" />
+          </div>
+          <div class="profile__row">
+            <label for="party">Party</label>
+            <select id="party">
+              <option value="Civic Unity">Civic Unity</option>
+              <option value="Forward Coalition">Forward Coalition</option>
+              <option value="Green Horizon">Green Horizon</option>
+              <option value="Liberty Alliance">Liberty Alliance</option>
+            </select>
+          </div>
+          <div class="profile__row profile__issues">
+            <div>
+              <label for="econ">Economy</label>
+              <select id="econ" data-issue="Economy">
+                <option value="pro-stimulus">Pro-stimulus</option>
+                <option value="balanced">Balanced budgets</option>
+                <option value="austerity">Austerity</option>
+              </select>
+            </div>
+            <div>
+              <label for="env">Environment</label>
+              <select id="env" data-issue="Environment">
+                <option value="bold">Bold climate plan</option>
+                <option value="market">Market incentives</option>
+                <option value="minimal">Minimal regulation</option>
+              </select>
+            </div>
+            <div>
+              <label for="rights">Civil Rights</label>
+              <select id="rights" data-issue="Civil Rights">
+                <option value="expansive">Expansive protections</option>
+                <option value="moderate">Moderate reform</option>
+                <option value="traditional">Traditionalist</option>
+              </select>
+            </div>
+          </div>
+          <p class="hint">Tip: Each issue stance will move different voter blocs. Watch the approval bars as you experiment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <article class="panel" aria-labelledby="polls-heading">
+        <div class="panel__header">
+          <h2 id="polls-heading">Polling Snapshot</h2>
+          <span id="turnIndicator" class="pill">Turn 1</span>
+        </div>
+        <div id="pollBars" class="bars" aria-live="polite"></div>
+        <p class="hint">Hover a bar to learn why a group feels the way it does.</p>
+      </article>
+
+      <article class="panel" aria-labelledby="map-heading">
+        <div class="panel__header">
+          <h2 id="map-heading">Map of Influence</h2>
+          <span class="pill pill--calm" id="momentum">Momentum: 0</span>
+        </div>
+        <div class="map" role="img" aria-label="Stylized map with influence circles">
+          <div class="city city--blue" style="--x:18%; --y:62%;">Coastal City</div>
+          <div class="city city--green" style="--x:46%; --y:28%;">Lake District</div>
+          <div class="city city--gold" style="--x:70%; --y:52%;">River Bend</div>
+          <div class="city city--crimson" style="--x:84%; --y:20%;">High Plains</div>
+          <svg viewBox="0 0 800 480" class="map__svg">
+            <defs>
+              <radialGradient id="influence" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--accent-1)" stop-opacity="0.6" />
+                <stop offset="100%" stop-color="var(--accent-1)" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <circle cx="180" cy="310" r="120" fill="url(#influence)" />
+            <circle cx="370" cy="160" r="110" fill="url(#influence)" />
+            <circle cx="560" cy="250" r="130" fill="url(#influence)" />
+          </svg>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel" aria-labelledby="events-heading">
+      <div class="panel__header">
+        <h2 id="events-heading">News Desk</h2>
+        <button id="nextTurn" class="primary">Advance Turn</button>
+      </div>
+      <div id="eventCard" class="event" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <p class="eyebrow">How it works</p>
+      <p>Each turn brings a news event. Choose a response that reflects your platform. Approval rises or falls for voter blocs. Keep momentum positive to win election day.</p>
+    </div>
+    <div class="score">
+      <p class="eyebrow">Target</p>
+      <strong>Reach 55% overall approval by turn 12.</strong>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
